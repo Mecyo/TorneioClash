@@ -1,4 +1,10 @@
 module.exports = {
+  chainWebpack: config => {
+    config.plugin('VuetifyLoaderPlugin').tap(args => [{
+      progressiveImages: true
+    }])
+  },
+  
   devServer: {
     disableHostCheck: true,
   },

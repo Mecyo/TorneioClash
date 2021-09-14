@@ -1,5 +1,6 @@
 {
-  "avatar": "Vuetify MD",
+  "title": "Torneio dos Insanos",
+  "avatar": "Torneio dos Insanos",
   "buttons": "Buttons",
   "calendar": "Calendar",
   "charts": "Charts",
@@ -38,7 +39,7 @@
   "timeline": "Timeline",
   "typography": "Typography",
   "upgrade": "Upgrade To PRO",
-  "user": "User Profile",
+  "user": "Registro",
   "vforms": "Validation Forms",
   "widgets": "Widgets",
   "wizard": "Wizard"

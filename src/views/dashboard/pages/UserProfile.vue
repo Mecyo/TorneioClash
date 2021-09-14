@@ -4,6 +4,9 @@
     fluid
     tag="section"
   >
+    <v-alert :type="typeAlert" :value="alert">
+      {{alertMessage}}
+    </v-alert>
     <v-row justify="center">
       <v-col
         cols="12"
@@ -12,44 +15,25 @@
         <base-material-card>
           <template v-slot:heading>
             <div class="display-2 font-weight-light">
-              Edit Profile
+              Registrar-se
             </div>
 
             <div class="subtitle-1 font-weight-light">
-              Complete your profile
+              Complete seu registro
             </div>
           </template>
 
-          <v-form>
+          <v-form ref="form" class="mx-2" lazy-validation>
             <v-container class="py-0">
               <v-row>
                 <v-col
                   cols="12"
-                  md="4"
+                  md="6"
                 >
                   <v-text-field
-                    label="Company (disabled)"
-                    disabled
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    class="purple-input"
-                    label="User Name"
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    label="Email Address"
-                    class="purple-input"
+                    label="Nome completo"
+                    v-model="player.nome"
+                    :rules="[v => !!v || 'Nome é obrigatório!']"
                   />
                 </v-col>
 
@@ -58,45 +42,11 @@
                   md="6"
                 >
                   <v-text-field
-                    label="First Name"
+                    label="E-mail"
                     class="purple-input"
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="6"
-                >
-                  <v-text-field
-                    label="Last Name"
-                    class="purple-input"
-                  />
-                </v-col>
-
-                <v-col cols="12">
-                  <v-text-field
-                    label="Adress"
-                    class="purple-input"
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    label="City"
-                    class="purple-input"
-                  />
-                </v-col>
-
-                <v-col
-                  cols="12"
-                  md="4"
-                >
-                  <v-text-field
-                    label="Country"
-                    class="purple-input"
+                    v-model="player.email"
+                    :rules="[v => !!v || 'E-mail é obrigatório!',
+                      v => /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail precisa ser válido']"
                   />
                 </v-col>
 
@@ -106,17 +56,45 @@
                 >
                   <v-text-field
                     class="purple-input"
-                    label="Postal Code"
-                    type="number"
+                    label="Nick no jogo"
+                    v-model="player.nickname"
+                    :rules="[v => !!v || 'Nick é obrigatório!']"
                   />
                 </v-col>
 
-                <v-col cols="12">
-                  <v-textarea
+                <v-col
+                  cols="12"
+                  md="4"
+                >
+                  <v-select 
                     class="purple-input"
-                    label="About Me"
-                    value="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-                  />
+                    item-text="nome"
+                    item-value="id"
+                    :items="clans"
+                    label="Clã"
+                    v-model="player.clan"
+                    :rules="[v => !!v && v.id != 0 || 'Clã é obrigatório!']"
+                  ></v-select>
+                </v-col>
+
+                <v-col
+                  cols="12"
+                  md="1"
+                >
+                  <v-select
+                    :items="[1,2,3,4,5,6,7,8,9,10,10,11,12,13]"
+                    label="Nível"
+                    v-model="player.nivel"
+                    :rules="[v => !!v || 'Nível é obrigatório!']"
+                  ></v-select>
+                </v-col>
+
+                <v-col cols="12" md="4">
+                  <vue-tel-input-vuetify v-model="player.telefone"
+                    label="WhatsApp (DDD-Número)"
+                    class="purple-input"
+                    :rules="[v => !!v || 'Telefone é obrigatório!']">
+                  </vue-tel-input-vuetify>
                 </v-col>
 
                 <v-col
@@ -124,10 +102,18 @@
                   class="text-right"
                 >
                   <v-btn
+                    color="error"
+                    class="mr-0"
+                    @click="listar"
+                  >
+                    Listar
+                  </v-btn>
+                  <v-btn
                     color="success"
                     class="mr-0"
+                    @click="salvar"
                   >
-                    Update Profile
+                    Salvar
                   </v-btn>
                 </v-col>
               </v-row>
@@ -141,20 +127,22 @@
         md="4"
       >
         <base-material-card
-          class="v-card-profile"
-          avatar="https://demos.creative-tim.com/vue-material-dashboard/img/marc.aba54d65.jpg"
+          class="v-card-profile" 
+          avatar="../../../../profile.png"
         >
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 grey--text">
-              CEO / CO-FOUNDER
+              DESENVOLVEDOR/ORGANIZADOR
             </h6>
 
             <h4 class="display-2 font-weight-light mb-3 black--text">
-              Alec Thompson
+              Emerson Santos (Mecyo)
             </h4>
 
             <p class="font-weight-light grey--text">
-              Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+              Criei este torneio, inicialmente, para animar a galera do clã.
+              <br>Agora estamos disponibilizando para todos participarem.
+              <br>Divirtam-se! 
             </p>
 
             <v-btn
@@ -162,7 +150,7 @@
               rounded
               class="mr-0"
             >
-              Follow
+              Seguir
             </v-btn>
           </v-card-text>
         </base-material-card>
@@ -172,7 +160,68 @@
 </template>
 
 <script>
+import VueTelInputVuetify from "vue-tel-input-vuetify/lib/vue-tel-input-vuetify.vue"
+import api from "@/api";
+
   export default {
-    //
+    components: {
+      VueTelInputVuetify,
+    },
+    data() {
+      return {
+        clans: [{id: 0, nome: "Selecione"}, {id: 1, nome: "Insanos"}, {id: 2, nome: "Terroristas"}, {id: 3, nome: "Irmandade"}, {id: 4, nome: "Outros"}],
+        alert: false,
+        typeAlert: "success",
+        alertMessage: "",
+        player: {clan: {id: 0, nome: "Selecione"}},
+      }
+    },
+    methods: {
+      listar() {
+        /*var myHeaders = new Headers();
+        myHeaders.append('Access-Control-Allow-Origin', '*');
+
+        var myInit = { method: 'GET',
+          headers: myHeaders,
+          //mode: 'cors',
+          cache: 'default' };
+
+        fetch('http://localhost:8080/players', myInit)
+        .then(function(response) {
+          debugger
+          return response.blob();
+        });*/
+
+        api.get("/entregas")
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          debugger
+          this.typeAlert = "error";
+          this.alertMessage = "Falha ao efetuar o registro: " + error;
+          console.log(error);
+        });
+      },
+      salvar () {
+        if(this.$refs.form.validate()) {
+          api.post("/players", this.player)
+          .then(() => {
+            this.typeAlert = "success";
+            this.alertMessage = "Registro efetuado com sucesso";
+            console.log('Registro efetuado com sucesso');
+          })
+          .catch((error) => {
+            this.typeAlert = "error";
+            this.alertMessage = "Falha ao efetuar o registro: " + error;
+            console.log(error);
+          });
+        }
+        this.alert = true;
+        setTimeout(()=>{
+          this.alert = false;
+        },5000);
+      },
+    },
   }
 </script>

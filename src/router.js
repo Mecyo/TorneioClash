@@ -19,11 +19,11 @@ export default new Router({
         },
         // Pages
         {
-          name: 'User Profile',
+          name: 'Página de registro',
           path: 'pages/user',
           component: () => import('@/views/dashboard/pages/UserProfile'),
         },
-        {
+        /*{
           name: 'Notifications',
           path: 'components/notifications',
           component: () => import('@/views/dashboard/component/Notifications'),
@@ -55,7 +55,7 @@ export default new Router({
           name: 'Upgrade',
           path: 'upgrade',
           component: () => import('@/views/dashboard/Upgrade'),
-        },
+        },*/
       ],
     },
   ],

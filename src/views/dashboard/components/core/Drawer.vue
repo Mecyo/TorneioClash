@@ -5,7 +5,7 @@
     :dark="barColor !== 'rgba(228, 226, 226, 1), rgba(255, 255, 255, 0.7)'"
     :expand-on-hover="expandOnHover"
     :right="$vuetify.rtl"
-    :src="barImage"
+    src="../../../../assets/back2.jpg"
     mobile-break-point="960"
     app
     width="260"
@@ -31,8 +31,8 @@
           contain
         >
           <v-img
-            src="https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico"
-            max-height="30"
+            src="../../../../assets/icone.jpg"
+            max-height="32"
           />
         </v-list-item-avatar>
 
@@ -76,15 +76,6 @@
       <div />
     </v-list>
 
-    <template v-slot:append>
-      <base-item
-        :item="{
-          title: $t('upgrade'),
-          icon: 'mdi-package-up',
-          to: '/upgrade',
-        }"
-      />
-    </template>
   </v-navigation-drawer>
 </template>
 
@@ -116,7 +107,7 @@
           title: 'user',
           to: '/pages/user',
         },
-        {
+        /*{
           title: 'rtables',
           icon: 'mdi-clipboard-outline',
           to: '/tables/regular-tables',
@@ -140,7 +131,7 @@
           title: 'notifications',
           icon: 'mdi-bell',
           to: '/components/notifications',
-        },
+        },*/
       ],
     }),
 
