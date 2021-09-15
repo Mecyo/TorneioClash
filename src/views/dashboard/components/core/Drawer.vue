@@ -107,12 +107,12 @@
           title: 'user',
           to: '/pages/user',
         },
-        /*{
+        {
           title: 'rtables',
           icon: 'mdi-clipboard-outline',
           to: '/tables/regular-tables',
         },
-        {
+        /*{
           title: 'typography',
           icon: 'mdi-format-font',
           to: '/components/typography',

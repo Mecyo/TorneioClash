@@ -23,6 +23,12 @@ export default new Router({
           path: 'pages/user',
           component: () => import('@/views/dashboard/pages/UserProfile'),
         },
+        // Tables
+        {
+          name: 'Relação de inscritos',
+          path: 'tables/regular-tables',
+          component: () => import('@/views/dashboard/tables/RegularTables'),
+        },
         /*{
           name: 'Notifications',
           path: 'components/notifications',
@@ -37,12 +43,6 @@ export default new Router({
           name: 'Typography',
           path: 'components/typography',
           component: () => import('@/views/dashboard/component/Typography'),
-        },
-        // Tables
-        {
-          name: 'Regular Tables',
-          path: 'tables/regular-tables',
-          component: () => import('@/views/dashboard/tables/RegularTables'),
         },
         // Maps
         {

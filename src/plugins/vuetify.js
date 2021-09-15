@@ -1,9 +1,17 @@
 import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
+import Vuetify, { VSnackbar, VBtn, VIcon } from 'vuetify/lib'
+import VuetifyToast from 'vuetify-toast-snackbar'
 import i18n from '@/i18n'
 import '@/sass/overrides.sass'
 
-Vue.use(Vuetify)
+
+Vue.use(Vuetify, {
+  components: {
+    VSnackbar,
+    VBtn,
+    VIcon
+  }
+})
 
 const theme = {
   primary: '#4CAF50',
@@ -12,14 +20,18 @@ const theme = {
   info: '#00CAE3',
 }
 
-export default new Vuetify({
-  lang: {
-    t: (key, ...params) => i18n.t(key, params),
-  },
-  theme: {
-    themes: {
-      dark: theme,
-      light: theme,
+const veutifyObj = new Vuetify({
+    lang: {
+      t: (key, ...params) => i18n.t(key, params),
     },
-  },
-})
+    theme: {
+      themes: {
+        dark: theme,
+        light: theme,
+      },
+    },
+});
+
+Vue.use(VuetifyToast, { $vuetify: veutifyObj.framework })
+
+export default veutifyObj;

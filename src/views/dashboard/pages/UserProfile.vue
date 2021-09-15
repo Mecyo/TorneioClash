@@ -4,9 +4,6 @@
     fluid
     tag="section"
   >
-    <v-alert :type="typeAlert" :value="alert">
-      {{alertMessage}}
-    </v-alert>
     <v-row justify="center">
       <v-col
         cols="12"
@@ -66,7 +63,7 @@
                   cols="12"
                   md="4"
                 >
-                  <v-select 
+                  <v-select
                     class="purple-input"
                     item-text="nome"
                     item-value="id"
@@ -79,7 +76,7 @@
 
                 <v-col
                   cols="12"
-                  md="1"
+                  md="2"
                 >
                   <v-select
                     :items="[1,2,3,4,5,6,7,8,9,10,10,11,12,13]"
@@ -102,16 +99,9 @@
                   class="text-right"
                 >
                   <v-btn
-                    color="error"
-                    class="mr-0"
-                    @click="listar"
-                  >
-                    Listar
-                  </v-btn>
-                  <v-btn
                     color="success"
                     class="mr-0"
-                    @click="salvar"
+                    @click.stop.prevent="salvar"
                   >
                     Salvar
                   </v-btn>
@@ -127,7 +117,7 @@
         md="4"
       >
         <base-material-card
-          class="v-card-profile" 
+          class="v-card-profile"
           avatar="../../../../profile.png"
         >
           <v-card-text class="text-center">
@@ -142,7 +132,7 @@
             <p class="font-weight-light grey--text">
               Criei este torneio, inicialmente, para animar a galera do clã.
               <br>Agora estamos disponibilizando para todos participarem.
-              <br>Divirtam-se! 
+              <br>Divirtam-se!
             </p>
 
             <v-btn
@@ -169,58 +159,37 @@ import api from "@/api";
     },
     data() {
       return {
-        clans: [{id: 0, nome: "Selecione"}, {id: 1, nome: "Insanos"}, {id: 2, nome: "Terroristas"}, {id: 3, nome: "Irmandade"}, {id: 4, nome: "Outros"}],
-        alert: false,
-        typeAlert: "success",
-        alertMessage: "",
-        player: {clan: {id: 0, nome: "Selecione"}},
+        clans: [{id: 1, nome: "Insanos"}, {id: 2, nome: "Terroristas"}, {id: 3, nome: "Irmandade"}, {id: 4, nome: "Outros"}],
+        player: {},
       }
     },
     methods: {
-      listar() {
-        /*var myHeaders = new Headers();
-        myHeaders.append('Access-Control-Allow-Origin', '*');
-
-        var myInit = { method: 'GET',
-          headers: myHeaders,
-          //mode: 'cors',
-          cache: 'default' };
-
-        fetch('http://localhost:8080/players', myInit)
-        .then(function(response) {
-          debugger
-          return response.blob();
-        });*/
-
-        api.get("/entregas")
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          debugger
-          this.typeAlert = "error";
-          this.alertMessage = "Falha ao efetuar o registro: " + error;
-          console.log(error);
-        });
-      },
       salvar () {
         if(this.$refs.form.validate()) {
           api.post("/players", this.player)
           .then(() => {
-            this.typeAlert = "success";
-            this.alertMessage = "Registro efetuado com sucesso";
+            this.$toast.success("Registro efetuado com sucesso", {
+              dismissable: true,
+              x: 'center',
+              y: 'top',
+              timeout: 2000,
+            })
+            setTimeout(()=>{
+              this.$router.push("/tables/regular-tables");
+            },2000);
             console.log('Registro efetuado com sucesso');
           })
           .catch((error) => {
-            this.typeAlert = "error";
-            this.alertMessage = "Falha ao efetuar o registro: " + error;
+            debugger
+            this.$toast.error("Falha ao efetuar o registro: " + error.response.data.titulo, {
+              dismissable: true,
+              x: 'center',
+              y: 'top',
+              timeout: 4000,
+            })
             console.log(error);
           });
         }
-        this.alert = true;
-        setTimeout(()=>{
-          this.alert = false;
-        },5000);
       },
     },
   }
