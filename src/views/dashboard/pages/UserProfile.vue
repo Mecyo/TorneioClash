@@ -79,7 +79,7 @@
                   md="2"
                 >
                   <v-select
-                    :items="[1,2,3,4,5,6,7,8,9,10,10,11,12,13]"
+                    :items="[1,2,3,4,5,6,7,8,9,10,10,11,12,13,14]"
                     label="Nível"
                     v-model="player.nivel"
                     :rules="[v => !!v || 'Nível é obrigatório!']"
