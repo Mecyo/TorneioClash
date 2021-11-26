@@ -101,6 +101,13 @@
 
     <div class="py-3" /> -->
 
+    <v-btn
+      color="success"
+      class="mr-0"
+      @click.stop.prevent="enviarEmailSenha"
+    >
+      Salvar
+    </v-btn>
     <base-material-card
       color="success"
       dark
@@ -117,9 +124,6 @@
     >
       <template v-slot:[`item.dataRegistro`]="{ item }">
         <span>{{ new Date(item.dataRegistro).toLocaleString() }}</span>
-      </template>
-      <template v-slot:[`item.clan`]="{ item }">
-        <span>{{ getClanName(item.clan) }}</span>
       </template>
     </v-data-table>
     </base-material-card>
@@ -140,29 +144,46 @@ export default {
             value: 'id',
           },
           { text: 'Nickname', value: 'nickname' },
-          { text: 'Nome', value: 'nome' },
-          { text: 'Clã', value: 'clan' },
+          { text: 'Nome', value: 'cliente.nome' },
+          { text: 'Clã', value: 'clan.nome' },
           { text: 'Nível', value: 'nivel' },
           { text: 'Data de registro', value: 'dataRegistro' },
         ],
         players: [],
-        clans: [{id: 1, nome: "Insanos"}, {id: 2, nome: "Terroristas"}, {id: 3, nome: "Irmandade"}, {id: 4, nome: "Outros"}],
       }
     },
     mounted () {
       this.getDataFromApi()
     },
     methods: {
-      getClanName(item) {
+      enviarEmailSenha() {
         debugger
-          if(item) {
-            return this.clans.find( clan => clan.id === item).nome;
-          }
+        const ids = this.players.map(function(item){
+          return item.id;
+        });
 
-          return 'Not Found';
+        api.post("/clientes/send-mail-pass", ids)
+        .then(() => {
+          this.$toast.success("E-mail's enviados com sucesso!", {
+              dismissable: true,
+              x: 'center',
+              y: 'top',
+              timeout: 4000,
+            })
+        })
+        .catch((error) => {
+          this.$toast.error("Falha ao efetuar o envio dos e-mail's: " + error.response.data.titulo, {
+              dismissable: true,
+              x: 'center',
+              y: 'top',
+              timeout: 4000,
+            })
+          console.log(error);
+        });
       },
       getDataFromApi () {
         this.loading = true
+        debugger
         api.get("/players")
         .then((data) => {
           if(data) {

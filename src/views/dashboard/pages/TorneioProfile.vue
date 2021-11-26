@@ -159,27 +159,9 @@ import api from "@/api";
     },
     data() {
       return {
-        clans: [],
+        clans: [{id: 1, nome: "Insanos"}, {id: 2, nome: "Terroristas"}, {id: 3, nome: "Irmandade"}, {id: 4, nome: "Outros"}],
         player: {},
       }
-    },
-    created () {
-      debugger
-      api.get("/clans")
-        .then((data) => {
-          if(data) {
-            this.clans = data.data;
-          }
-        })
-        .catch((error) => {
-          this.$toast.error("Falha ao buscar registros de clãs: " + error.response.data.titulo, {
-            dismissable: true,
-            x: 'center',
-            y: 'top',
-            timeout: 4000,
-          })
-          console.log(error);
-        });
     },
     methods: {
       salvar () {

@@ -3,6 +3,8 @@ import Vuetify, { VSnackbar, VBtn, VIcon } from 'vuetify/lib'
 import VuetifyToast from 'vuetify-toast-snackbar'
 import i18n from '@/i18n'
 import '@/sass/overrides.sass'
+import '@fortawesome/fontawesome-free/css/all.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
 
 
 Vue.use(Vuetify, {

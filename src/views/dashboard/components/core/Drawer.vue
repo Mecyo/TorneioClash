@@ -6,7 +6,7 @@
     :expand-on-hover="expandOnHover"
     :right="$vuetify.rtl"
     src="../../../../assets/back2.jpg"
-    mobile-break-point="960"
+    mobile-breakpoint="960"
     app
     width="260"
     v-bind="$attrs"
@@ -39,7 +39,7 @@
         <v-list-item-content>
           <v-list-item-title
             class="display-1"
-            v-text="profile.title"
+            v-text="title"
           />
         </v-list-item-content>
       </v-list-item>
@@ -147,6 +147,9 @@
       },
       computedItems () {
         return this.items.map(this.mapItem)
+      },
+      title () {
+        return `Olá, ${this.$store.state.user.nome.split(" ")[0]}`;
       },
       profile () {
         return {

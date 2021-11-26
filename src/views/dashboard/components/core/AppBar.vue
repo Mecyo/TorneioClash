@@ -35,6 +35,7 @@
       color="secondary"
       hide-details
       style="max-width: 165px;"
+      v-model="txtSearch"
     >
       <template
         v-if="$vuetify.breakpoint.mdAndUp"
@@ -45,6 +46,7 @@
           elevation="1"
           fab
           small
+          @click.stop.prevent="pesquisar"
         >
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
@@ -161,6 +163,7 @@
     },
 
     data: () => ({
+      txtSearch: '',
       notifications: [
         'Mike John Responded to your email',
         'You have 5 new tasks',
@@ -178,6 +181,10 @@
       ...mapMutations({
         setDrawer: 'SET_DRAWER',
       }),
+      pesquisar() {
+        debugger
+        console.log(this.$state)
+      }
     },
   }
 </script>
