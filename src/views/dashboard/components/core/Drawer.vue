@@ -112,6 +112,11 @@
           icon: 'mdi-clipboard-outline',
           to: '/tables/regular-tables',
         },
+        {
+          title: 'blacklist',
+          icon: 'mdi-account-cancel',
+          to: '/tables/black-list',
+        },
         /*{
           title: 'typography',
           icon: 'mdi-format-font',
@@ -126,12 +131,12 @@
           title: 'google',
           icon: 'mdi-map-marker',
           to: '/maps/google-maps',
-        },
+        },*/
         {
           title: 'notifications',
           icon: 'mdi-bell',
           to: '/components/notifications',
-        },*/
+        },
       ],
     }),
 

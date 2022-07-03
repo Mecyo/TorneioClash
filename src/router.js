@@ -47,12 +47,20 @@ const routes = [
           requiresAuth: true
         },
       },
-      /*{
+      {
+        name: 'Lista negra',
+        path: '/tables/black-list',
+        component: () => import('@/views/dashboard/tables/BlackList'),
+        meta: {
+          requiresAuth: true
+        },
+      },
+      {
         name: 'Notifications',
         path: 'components/notifications',
         component: () => import('@/views/dashboard/component/Notifications'),
       },
-      {
+      /*{
         name: 'Icons',
         path: 'components/icons',
         component: () => import('@/views/dashboard/component/Icons'),
