@@ -13,16 +13,8 @@ function getToken() {
   return 'Bearer ' + token;
 }
 
-function getUrl() {
-  debugger
-  const url = process.env.VUE_APP_API_PROD_URL;
-
-  return url;
-}
-
 const api = axios.create({
-    //baseURL: "https://curso-msr.herokuapp.com/",
-    baseURL: getUrl(),
+    baseURL: process.env.VUE_APP_API_URL,
     withCredentials: false,
 });
 

@@ -178,6 +178,7 @@ import api from "@/api";
     },
     methods: {
       logar () {
+debugger
         if(this.$refs.formLogin.validate()) {
           api.post('/authenticate', this.user)
           .then((data) => {
@@ -193,12 +194,14 @@ import api from "@/api";
             },2000);
           })
           .catch((error) => {
-            this.$toast.error("Falha ao efetuar o login: " + error.response.data.titulo, {
-              dismissable: true,
-              x: 'center',
-              y: 'top',
-              timeout: 4000,
-            })
+            if(error.response && error.response.data && error.response.data.error) {
+              this.$toast.error("Falha ao efetuar o login: " + error.response.data.error, {
+                dismissable: true,
+                x: 'center',
+                y: 'top',
+                timeout: 4000,
+              })
+            }
             console.log(error);
           });
         }
