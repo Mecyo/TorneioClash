@@ -3,7 +3,6 @@ import store from './store'
 
 function getToken() {
   var token = '';
-  debugger
   if(store && store.state && store.state.user) {
     token = store.state.user.token;
   } else {

@@ -122,7 +122,7 @@
         >
           <v-card-text class="text-center">
             <h6 class="display-1 mb-1 grey--text">
-              DESENVOLVEDOR/ORGANIZADOR
+              DESENVOLVEDOR/ORGANIZADOR - 123
             </h6>
 
             <h4 class="display-2 font-weight-light mb-3 black--text">
