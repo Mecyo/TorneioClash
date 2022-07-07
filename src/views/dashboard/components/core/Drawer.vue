@@ -83,7 +83,7 @@
   // Utilities
   import {
     mapState,
-  } from 'vuex'
+  } from 'vuex';
 
   export default {
     name: 'DashboardCoreDrawer',
@@ -116,6 +116,11 @@
           title: 'blacklist',
           icon: 'mdi-account-cancel',
           to: '/tables/black-list',
+        },
+        {
+          title: 'war-ranking',
+          icon: 'mdi-podium',
+          to: '/tables/war-ranking',
         },
         /*{
           title: 'typography',
@@ -151,7 +156,11 @@
         },
       },
       computedItems () {
-        return this.items.map(this.mapItem)
+        var permissions = this.$store.state.user.permissoes;
+        var allRoutes = this.$router.getRoutes();
+        var permittedPaths = allRoutes.filter(r => permissions.some(p => r.meta.permissions.includes(p)));
+        var permittedItems = this.items.filter(i => permittedPaths.map(p => p.path).includes(i.to));
+        return permittedItems.map(this.mapItem)
       },
       title () {
         return `Olá, ${this.$store.state.user.nome.split(" ")[0]}`;

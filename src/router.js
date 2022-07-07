@@ -9,7 +9,8 @@ const routes = [
     name: 'Login',
     path: '/login',
     meta: {
-        hideForAuth: true
+        hideForAuth: true,
+        permissions: ['ROLE_USER']
     },
     component: () => import('@/views/dashboard/components/core/Login')
   },
@@ -17,7 +18,8 @@ const routes = [
     path: '/',
     component: () => import('@/views/dashboard/Index'),
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      permissions: ['ROLE_USER']
     },
     children: [
       // Dashboard
@@ -26,7 +28,8 @@ const routes = [
         path: '',
         component: () => import('@/views/dashboard/Dashboard'),
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          permissions: ['ROLE_USER']
         },
       },
       // Pages
@@ -35,7 +38,8 @@ const routes = [
         path: '/pages/user',
         component: () => import('@/views/dashboard/pages/UserProfile'),
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          permissions: ['ROLE_USER']
         },
       },
       // Tables
@@ -44,7 +48,8 @@ const routes = [
         path: '/tables/regular-tables',
         component: () => import('@/views/dashboard/tables/RegularTables'),
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          permissions: ['ROLE_USER']
         },
       },
       {
@@ -52,13 +57,27 @@ const routes = [
         path: '/tables/black-list',
         component: () => import('@/views/dashboard/tables/BlackList'),
         meta: {
-          requiresAuth: true
+          requiresAuth: true,
+          permissions: ['ROLE_ADMIN']
+        },
+      },
+      {
+        name: 'Ranking semanal da guerra',
+        path: '/tables/war-ranking',
+        component: () => import('@/views/dashboard/tables/WarRanking'),
+        meta: {
+          requiresAuth: true,
+          permissions: ['ROLE_USER']
         },
       },
       {
         name: 'Notifications',
         path: 'components/notifications',
         component: () => import('@/views/dashboard/component/Notifications'),
+        meta: {
+          requiresAuth: true,
+          permissions: ['ROLE_ADMIN']
+        }
       },
       /*{
         name: 'Icons',
@@ -87,7 +106,8 @@ const routes = [
         path: "/:pathMatch(.*)*",
         component: () => import('@/views/PageNotFound'),
         meta: {
-          requiresAuth: false
+          requiresAuth: false,
+          permissions: ['ROLE_USER']
         },
       }
     ],

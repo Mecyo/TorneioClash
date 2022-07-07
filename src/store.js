@@ -9,6 +9,7 @@ const store = new Vuex.Store({
     barImage: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
     drawer: null,
     user: null,
+    token: null,
   },
   mutations: {
     SET_BAR_IMAGE (state, payload) {
@@ -19,6 +20,9 @@ const store = new Vuex.Store({
     },
     SET_USER (state, payload) {
       state.user = payload
+    },
+    UPDATE_TOKEN (state, payload) {
+      state.token = payload
     },
   },
   actions: {

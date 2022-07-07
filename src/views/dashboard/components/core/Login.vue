@@ -12,7 +12,7 @@
                       <v-card-text class="mt-12">
                         <h1
                           class="text-center display-2 teal--text text--accent-3"
-                        >Acessar Torneios dos Insanos</h1>
+                        >Acessar site dos Insanos</h1>
                         <div class="text-center mt-4">
                           <v-btn class="mx-2" fab color="black" outlined>
                             <v-icon>fab fa-facebook-f</v-icon>
@@ -123,7 +123,7 @@
                                     <v-text-field
                                       label="E-mail"
                                       class="purple-input"
-                                      v-model="cliente.username"
+                                      v-model="cliente.email"
                                       :rules="[v => !!v || 'E-mail é obrigatório!',
                                         v => /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v) || 'E-mail precisa ser válido']"
                                     />
@@ -177,38 +177,29 @@ import api from "@/api";
       }
     },
     methods: {
-      logar () {
-debugger
-        if(this.$refs.formLogin.validate()) {
+      logar() {
+        if (this.$refs.formLogin.validate()) {
           api.post('/authenticate', this.user)
-          .then((data) => {
-            this.$store.commit('SET_USER', data.data);
-            this.$toast.success("Login efetuado com sucesso!", {
-              dismissable: true,
-              x: 'center',
-              y: 'top',
-              timeout: 2000,
-            });
-            setTimeout(()=>{
+            .then((data) => {
+              this.$store.commit('SET_USER', data.data);
               this.$router.push("/");
-            },2000);
-          })
-          .catch((error) => {
-            if(error.response && error.response.data && error.response.data.error) {
-              this.$toast.error("Falha ao efetuar o login: " + error.response.data.error, {
-                dismissable: true,
-                x: 'center',
-                y: 'top',
-                timeout: 4000,
-              })
-            }
-            console.log(error);
-          });
+            })
+            .catch((error) => {
+              if (error.response && error.response.data && error.response.data.error) {
+                this.$toast.error("Falha ao efetuar o login: " + error.response.data.error, {
+                  dismissable: true,
+                  x: 'center',
+                  y: 'top',
+                  timeout: 4000,
+                })
+              }
+              console.log(error);
+            });
         }
       },
       salvar () {
         if(this.$refs.form.validate()) {
-          api.post("/clientes", this.cliente)
+          api.post("/clientes/cadastro", this.cliente)
           .then(() => {
             this.$toast.success("Registro efetuado com sucesso! Você receberá sua senha de acesso no email informado no cadastro.", {
               dismissable: true,
