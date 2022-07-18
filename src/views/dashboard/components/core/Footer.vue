@@ -54,20 +54,12 @@
     data: () => ({
       links: [
         {
-          href: '#',
-          text: 'Creative Tim',
+          href: 'https://www.linkedin.com/in/emerson-santos-843ba6113/',
+          text: 'Linkedin',
         },
         {
-          href: '#',
-          text: 'About Us',
-        },
-        {
-          href: '#',
-          text: 'Blog',
-        },
-        {
-          href: '#',
-          text: 'Licenses',
+          href: 'https://github.com/Mecyo',
+          text: 'GitHub',
         },
       ],
     }),

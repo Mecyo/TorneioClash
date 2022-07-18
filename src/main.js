@@ -27,13 +27,12 @@ import i18n from './i18n'
 
 Vue.config.productionTip = false;
 
-Vue.directive('can', (el, binding, vnode) => {
-  var permissions = store.state.user.permissoes;
-  if(permissions.includes(binding.value)) {
-    return vnode.elm.hidden = false;
-  }
-  else {           
-    return vnode.elm.hidden = true;
+Vue.directive('can', {
+  inserted(el, binding, vnode, old) {
+    var permissions = store.state.user.permissoes;
+    if (!permissions.includes(binding.value)) {
+      vnode.elm.parentElement.removeChild(vnode.elm)
+    }
   }
 });
 

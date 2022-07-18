@@ -65,6 +65,7 @@
     </v-btn>
 
     <v-menu
+      v-can="'ROLE_SUPER'"
       bottom
       left
       offset-y

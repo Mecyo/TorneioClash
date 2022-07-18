@@ -10,7 +10,7 @@ const routes = [
     path: '/login',
     meta: {
         hideForAuth: true,
-        permissions: ['ROLE_USER']
+        permissions: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER']
     },
     component: () => import('@/views/dashboard/components/core/Login')
   },
@@ -19,7 +19,7 @@ const routes = [
     component: () => import('@/views/dashboard/Index'),
     meta: {
       requiresAuth: true,
-      permissions: ['ROLE_USER']
+      permissions: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER']
     },
     children: [
       // Dashboard
@@ -29,7 +29,7 @@ const routes = [
         component: () => import('@/views/dashboard/Dashboard'),
         meta: {
           requiresAuth: true,
-          permissions: ['ROLE_USER']
+          permissions: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER']
         },
       },
       // Pages
@@ -39,7 +39,7 @@ const routes = [
         component: () => import('@/views/dashboard/pages/UserProfile'),
         meta: {
           requiresAuth: true,
-          permissions: ['ROLE_USER']
+          permissions: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER']
         },
       },
       // Tables
@@ -49,7 +49,7 @@ const routes = [
         component: () => import('@/views/dashboard/tables/RegularTables'),
         meta: {
           requiresAuth: true,
-          permissions: ['ROLE_USER']
+          permissions: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER']
         },
       },
       {
@@ -58,7 +58,7 @@ const routes = [
         component: () => import('@/views/dashboard/tables/BlackList'),
         meta: {
           requiresAuth: true,
-          permissions: ['ROLE_ADMIN']
+          permissions: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER']
         },
       },
       {
@@ -67,7 +67,7 @@ const routes = [
         component: () => import('@/views/dashboard/tables/WarRanking'),
         meta: {
           requiresAuth: true,
-          permissions: ['ROLE_USER']
+          permissions: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER']
         },
       },
       {
@@ -76,7 +76,7 @@ const routes = [
         component: () => import('@/views/dashboard/component/Notifications'),
         meta: {
           requiresAuth: true,
-          permissions: ['ROLE_ADMIN']
+          permissions: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER']
         }
       },
       /*{
@@ -107,7 +107,7 @@ const routes = [
         component: () => import('@/views/PageNotFound'),
         meta: {
           requiresAuth: false,
-          permissions: ['ROLE_USER']
+          permissions: ['ROLE_USER', 'ROLE_ADMIN', 'ROLE_SUPER']
         },
       }
     ],
